@@ -1,9 +1,9 @@
 ## KDImagePicker
 A modified simple library to select images from the gallery and camera with provision for use in multiple apps with varying file providers
 
-## Screenshot (same as used by esafirm)
+## Screenshot
 
-<img src="https://raw.githubusercontent.com/esafirm/android-image-picker/master/art/ss.gif" height="460" width="284"/>
+<img src="https://github.com/codesmithx/KDImagePicker/blob/master/sample_image.png" height="460" width="284"/>
 
 Add this to your project's `build.gradle`
 
@@ -83,6 +83,20 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         });
     }
 }
+```
+- Example on how to override file Provider
+```java
+ <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/my_provider_paths"
+                tools:replace="android:resource" />
+        </provider>
 ```
 
 
