@@ -19,7 +19,7 @@ And add this to your module's `build.gradle`
 
 ```groovy
 dependencies {
-	compile 'com.kissdevs.imagepicker:app:x.y.z'	
+	compile 'com.github.codesmithx:KDImagePicker:x.y.z'	
 }
 ```
 
