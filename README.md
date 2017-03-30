@@ -1,5 +1,5 @@
 ## KDImagePicker
-A modified simple library to select images from the gallery and camera with provision for use in multiple apps with varying file providers
+A modified simple library to select images from the gallery and camera with provision for use in multiple apps with varying file providers. The classes are well factored so that they don't clash with any of Android's / the support library's default ones. 
 
 ## Screenshot
 
