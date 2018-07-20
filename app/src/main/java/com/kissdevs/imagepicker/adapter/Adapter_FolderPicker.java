@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kissdevs.imagepicker.R;
 import com.kissdevs.imagepicker.listeners.OnFolderClickListener;
 import com.kissdevs.imagepicker.model.Picker_Folder;
@@ -45,8 +46,7 @@ public class Adapter_FolderPicker extends RecyclerView.Adapter<Adapter_FolderPic
 
         Glide.with(context)
                 .load(folder.getImages().get(0).getPath())
-                .placeholder(R.drawable.folder_placeholder)
-                .error(R.drawable.folder_placeholder)
+                .apply(new RequestOptions().placeholder(R.drawable.folder_placeholder).error(R.drawable.folder_placeholder))
                 .into(holder.image);
 
         holder.name.setText(folders.get(position).getFolderName());
@@ -81,9 +81,9 @@ public class Adapter_FolderPicker extends RecyclerView.Adapter<Adapter_FolderPic
         public FolderViewHolder(View itemView) {
             super(itemView);
 
-            image = (ImageView) itemView.findViewById(R.id.image);
-            name = (TextView) itemView.findViewById(R.id.tv_name);
-            number = (TextView) itemView.findViewById(R.id.tv_number);
+            image = itemView.findViewById(R.id.image);
+            name = itemView.findViewById(R.id.tv_name);
+            number = itemView.findViewById(R.id.tv_number);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.kissdevs.imagepicker.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kissdevs.imagepicker.R;
 import com.kissdevs.imagepicker.listeners.OnImageClickListener;
 import com.kissdevs.imagepicker.model.Picker_Image;
@@ -46,16 +48,22 @@ public class Adapter_ImagePicker extends RecyclerView.Adapter<Adapter_ImagePicke
 
         Glide.with(context)
                 .load(image.getPath())
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
+                .apply(new RequestOptions().placeholder(R.drawable.image_placeholder).error(R.drawable.image_placeholder))
                 .into(viewHolder.imageView);
 
         if (isSelected(image)) {
             viewHolder.alphaView.setAlpha(0.5f);
-            ((FrameLayout) viewHolder.itemView).setForeground(ContextCompat.getDrawable(context, R.drawable.ic_done_white));
+            if (Build.VERSION.SDK_INT >= 23)
+                viewHolder.itemView.setForeground(ContextCompat.getDrawable(context, R.drawable.ic_done_white));
+            else
+                viewHolder.itemView.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.ic_done_white));
         } else {
             viewHolder.alphaView.setAlpha(0.0f);
-            ((FrameLayout) viewHolder.itemView).setForeground(null);
+
+            if (Build.VERSION.SDK_INT >= 23)
+                viewHolder.itemView.setForeground(null);
+            else
+                viewHolder.itemView.setBackgroundDrawable(null);
         }
 
     }
@@ -111,7 +119,7 @@ public class Adapter_ImagePicker extends RecyclerView.Adapter<Adapter_ImagePicke
         return images.get(position);
     }
 
-    public List<Picker_Image> getSelectedImages(){
+    public List<Picker_Image> getSelectedImages() {
         return selectedImages;
     }
 
@@ -123,7 +131,7 @@ public class Adapter_ImagePicker extends RecyclerView.Adapter<Adapter_ImagePicke
 
         public ImageViewHolder(View itemView, OnImageClickListener itemClickListener) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.image_view);
+            imageView = itemView.findViewById(R.id.image_view);
             alphaView = itemView.findViewById(R.id.view_alpha);
             this.itemClickListener = itemClickListener;
             itemView.setOnClickListener(this);
